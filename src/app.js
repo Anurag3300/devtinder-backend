@@ -34,7 +34,7 @@ app.use("/user",(req,res,next)=>{
   next();
   res.send("Response !!");
 },(req,res)=>{
-  console.log("Hanfling the route user 2");
+  console.log("Handling the route user 2");
   res.send("2nd Response !!");
 }
 );
