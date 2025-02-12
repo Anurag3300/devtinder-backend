@@ -1,4 +1,5 @@
 const express = require("express");
+const { adminAuth, userAuth } =require("./middlewares/auth")
 const app = express(); // creating new expressJS application
 //create a new webserver
 
@@ -29,15 +30,27 @@ const app = express(); // creating new expressJS application
 // });
 // if our Request Handler is empty then the api is hange after some time it timeout and it does not response any thing
 // in one route we have multiply route handler 
-app.use("/user",(req,res,next)=>{
-  console.log("Handling the route");
-  next();
-  res.send("Response !!");
-},(req,res)=>{
-  console.log("Handling the route user 2");
-  res.send("2nd Response !!");
-}
-);
+// app.use("/user",(req,res,next)=>{
+//   console.log("Handling the route");
+//   next();
+//   res.send("Response !!");
+// },(req,res)=>{
+//   console.log("Handling the route user 2");
+//   res.send("2nd Response !!");
+// }
+// );
+
+app.use("/Admin",adminAuth);
+
+app.get("/Admin/getAllData",(req,res)=>{
+  res.send("Get data send");
+})
+app.get("/Admin/deleteAllData",(req,res)=>{
+  res.send("Delete all Data");
+})
+app.get("/user",userAuth,(req,res)=>{
+  res.send("user data Send");
+})
 app.listen(3000, () => {
   console.log("the server is listen all the request at 3000 port");
 }); // our server is listen on port no 3000;
